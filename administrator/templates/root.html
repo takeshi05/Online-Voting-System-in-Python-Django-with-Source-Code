@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include 'header.html' %}
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+
+ {% include "navbar.html" %}
+   
+ {% include "sidebar.html" %}
+ 
+ 
+ <div class="modal fade" id="config">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title"><b>Configure</b></h4>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+                              <form class="form-horizontal" method="POST" action="{% url 'ballot_title'  %}">
+                <div class="form-group">
+                  {% csrf_token %}
+                  <label for="title" class="col-sm-3 control-label">Title</label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" required id="title" name="title" value="{{ TITLE }}">
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+            <button type="submit" class="btn btn-success btn-flat" name="save"><i class="fa fa-save"></i> Save</button>
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        {{ page_title }}
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">{{ page_title }}</li>
+      </ol>
+    </section>
+  {% block content %}
+    
+  {% endblock content %}
+  </div>
+{% include "footer.html" %}
+{% block modal %}
+  
+{% endblock modal %}
+</div>
+{% include "scripts.html"%}
+{% block custom_js %}
+  
+{% endblock custom_js %}
+</body>
+
+
+</html>
